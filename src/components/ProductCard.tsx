@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
             {product.image ? (
                 <img src={product.image} alt={product.name} />
             ) : (
-                <img src={"https://www.clipartsuggest.com/images/181/log-in-sign-up-upload-clipart-o72BVQ-clipart.png"}></img>
+                <img src={"https://www.clipartsuggest.com/images/181/log-in-sign-up-upload-clipart-o72BVQ-clipart.png"} alt={"Photo missing"}></img>
             )}
         </div>
     );
