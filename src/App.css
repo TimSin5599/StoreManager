@@ -1,0 +1,16 @@
+.App {
+    display: flex;
+}
+
+.content {
+    margin-top: 50px; /* Отступ для навигационной панели */
+    margin-left: 32px; /* Отступ для бокового меню */
+    padding: 30px; /* Отступы для содержимого */
+    overflow-y: auto; /* Добавляем прокрутку, если контента слишком много */
+}
+
+.content h1 {
+    margin-left: 18px;
+    margin-top: 5px;
+    font-family: "Playwrite GB S", sans-serif;
+}

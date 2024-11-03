@@ -1,0 +1,33 @@
+.product-card {
+    width: 200px; /* или любую другую ширину */
+    height: 300px; /* фиксированная высота для всех карточек */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px; /* расстояние между карточками */
+    display: flex;
+    flex-direction: column; /* для вертикального расположения элементов внутри карточки */
+    justify-content: space-between; /* чтобы распределить пространство между элементами */
+    overflow: hidden;
+}
+
+.product-card img {
+    width: 100%; /* изображение займет всю ширину карточки */
+    height: auto; /* сохраняем пропорции */
+    max-height: 150px; /* ограничение по высоте для изображений */
+    /*max-width: 150px;*/
+    /*align-self: center;*/
+}
+
+.product-card h3 {
+    font-weight: bold; /* жирный шрифт для названия товара */
+    margin: 0; /* убираем отступы */
+}
+
+.product-card p {
+    margin: 0; /* убираем отступы */
+    overflow: hidden; /* скрываем текст, который выходит за пределы */
+    text-overflow: ellipsis; /* добавляем многоточие, если текст не помещается */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* ограничиваем количество строк */
+    -webkit-box-orient: vertical;
+}
