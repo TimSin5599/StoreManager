@@ -54,9 +54,8 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onToggle }) => {
 
             <select value={selectedCategory} onChange={handleCategoryChange} className="category-select">
                 <option value="">Select category</option>
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="toys">Toys</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Vegetables">Vegetables</option>
             </select>
         </div>
     );
