@@ -1,12 +1,13 @@
 .App {
     display: flex;
+    background: #f7f7f7;
 }
 
 .content {
-    margin-top: 50px; /* Отступ для навигационной панели */
-    margin-left: 32px; /* Отступ для бокового меню */
-    padding: 30px; /* Отступы для содержимого */
-    overflow-y: auto; /* Добавляем прокрутку, если контента слишком много */
+    margin-top: 50px;
+    margin-left: 32px;
+    padding: 30px;
+    overflow-y: auto;
 }
 
 .content h1 {

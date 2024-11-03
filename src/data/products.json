@@ -1,362 +1,200 @@
 [
   {
     "id": 1,
-    "name": "Product 1",
-    "description": "Description for product 1. This is a great product.",
-    "category": "Category A",
+    "name": "Apple",
+    "description": "Fresh red apple.",
+    "category": "Fruits",
     "quantity": 10,
-    "unit": "pcs",
-    "image": "https://picsum.photos/200"
+    "unit": "pieces",
+    "image": "https://main-cdn.sbermegamarket.ru/big1/hlr-system/412/054/595/819/171/4/100033206141b0.jpg"
   },
   {
     "id": 2,
-    "name": "Product 2",
-    "description": "Description for product 2. This product is also good. This product is also good. This product is also good. This product is also good.",
-    "category": "Category B",
-    "quantity": 5,
-    "unit": "pcs",
-    "image": "https://yt3.googleusercontent.com/qzdviOhUGtycf4aun9XB5GxT6fAKzennOINCnWZeTSaroLle6H3sHWykq_4whlvqo8PyAiyrKg=s900-c-k-c0x00ffffff-no-rj"
+    "name": "Banana",
+    "description": "Ripe yellow banana.",
+    "category": "Fruits",
+    "quantity": 20,
+    "unit": "pieces",
+    "image": "https://steamuserimages-a.akamaihd.net/ugc/831329213371371783/06B84E6FC604FC50991016819976341F6BB1E6EB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
   },
   {
     "id": 3,
-    "name": "Product 3",
-    "description": "Description for product 3. You'll love this product.",
-    "category": "Category A",
-    "quantity": 20,
-    "unit": "pcs",
-    "image": ""
+    "name": "Carrot",
+    "category": "Vegetables",
+    "quantity": 15,
+    "unit": "pieces"
   },
   {
     "id": 4,
-    "name": "Product 4",
-    "description": "Description for product 4. It's a fantastic choice.",
-    "category": "Category C",
-    "quantity": 15,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Tomato",
+    "description": "The tomato is a popular fruit known for its bright red color and sweet flavor. It’s rich in vitamin C and antioxidants, particularly lycopene, which may reduce the risk of chronic diseases. Tomatoes are versatile in cooking, used in salads, sauces, and various dishes. They promote heart health due to their fiber and potassium content. Available in many varieties, such as cherry and beefsteak, tomatoes can be grown in gardens or greenhouses year-round. The tomato is a popular fruit known for its bright red color and sweet flavor. It’s rich in vitamin C and antioxidants, particularly lycopene, which may reduce the risk of chronic diseases. Tomatoes are versatile in cooking, used in salads, sauces, and various dishes. They promote heart health due to their fiber and potassium content. Available in many varieties, such as cherry and beefsteak, tomatoes can be grown in gardens or greenhouses year-round. The tomato is a popular fruit known for its bright red color and sweet flavor. It’s rich in vitamin C and antioxidants, particularly lycopene, which may reduce the risk of chronic diseases. Tomatoes are versatile in cooking, used in salads, sauces, and various dishes. They promote heart health due to their fiber and potassium content. Available in many varieties, such as cherry and beefsteak, tomatoes can be grown in gardens or greenhouses year-round.",
+    "quantity": 5,
+    "unit": "pieces"
   },
   {
     "id": 5,
-    "name": "Product 5",
-    "description": "Description for product 5. High quality and affordable.",
-    "category": "Category B",
-    "quantity": 7,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Potato",
+    "description": "Freshly harvested potato.",
+    "category": "Vegetables",
+    "quantity": 30,
+    "unit": "pieces"
   },
   {
     "id": 6,
-    "name": "Product 6",
-    "description": "Description for product 6. Great for daily use.",
-    "category": "Category A",
-    "quantity": 3,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Onion",
+    "description": "Fresh onion.",
+    "category": "Vegetables",
+    "quantity": 12,
+    "unit": "pieces"
   },
   {
     "id": 7,
-    "name": "Product 7",
-    "description": "Description for product 7. Don't miss this one!",
-    "category": "Category C",
-    "quantity": 12,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Lettuce",
+    "description": "Fresh green lettuce.",
+    "category": "Vegetables",
+    "quantity": 10,
+    "unit": "pieces"
   },
   {
     "id": 8,
-    "name": "Product 8",
-    "description": "Description for product 8. A customer favorite.",
-    "category": "Category A",
+    "name": "Orange",
+    "description": "Juicy orange.",
+    "category": "Fruits",
     "quantity": 8,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "unit": "pieces"
   },
   {
     "id": 9,
-    "name": "Product 9",
-    "description": "Description for product 9. Highly recommended.",
-    "category": "Category B",
-    "quantity": 6,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Strawberry",
+    "description": "Fresh strawberries.",
+    "category": "Fruits",
+    "quantity": 5,
+    "unit": "pieces"
   },
   {
     "id": 10,
-    "name": "Product 10",
-    "description": "Description for product 10. Perfect for gifts.",
-    "category": "Category C",
-    "quantity": 9,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Cucumber",
+    "description": "Fresh cucumber.",
+    "category": "Vegetables",
+    "quantity": 10,
+    "unit": "pieces"
   },
   {
     "id": 11,
-    "name": "Product 11",
-    "description": "Description for product 11.",
-    "category": "Category A",
-    "quantity": 11,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Grapes",
+    "description": "Fresh grapes.",
+    "category": "Fruits",
+    "quantity": 20,
+    "unit": "bunches"
   },
   {
     "id": 12,
-    "name": "Product 12",
-    "description": "Description for product 12.",
-    "category": "Category B",
-    "quantity": 2,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Pineapple",
+    "description": "Sweet pineapple.",
+    "category": "Fruits",
+    "quantity": 5,
+    "unit": "pieces"
   },
   {
     "id": 13,
-    "name": "Product 13",
-    "description": "Description for product 13.",
-    "category": "Category C",
-    "quantity": 13,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Broccoli",
+    "description": "Fresh broccoli.",
+    "category": "Vegetables",
+    "quantity": 7,
+    "unit": "pieces"
   },
   {
     "id": 14,
-    "name": "Product 14",
-    "description": "Description for product 14.",
-    "category": "Category A",
-    "quantity": 4,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Bell Pepper",
+    "description": "Fresh bell pepper.",
+    "category": "Vegetables",
+    "quantity": 10,
+    "unit": "pieces"
   },
   {
     "id": 15,
-    "name": "Product 15",
-    "description": "Description for product 15.",
-    "category": "Category B",
-    "quantity": 5,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Peach",
+    "description": "Juicy peach.",
+    "category": "Fruits",
+    "quantity": 6,
+    "unit": "pieces"
   },
   {
     "id": 16,
-    "name": "Product 16",
-    "description": "Description for product 16.",
-    "category": "Category C",
-    "quantity": 7,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Zucchini",
+    "description": "Fresh zucchini.",
+    "category": "Vegetables",
+    "quantity": 8,
+    "unit": "pieces"
   },
   {
     "id": 17,
-    "name": "Product 17",
-    "description": "Description for product 17.",
-    "category": "Category A",
-    "quantity": 15,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Eggplant",
+    "description": "Fresh eggplant.",
+    "category": "Vegetables",
+    "quantity": 4,
+    "unit": "pieces"
   },
   {
     "id": 18,
-    "name": "Product 18",
-    "description": "Description for product 18.",
-    "category": "Category B",
-    "quantity": 8,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Blueberry",
+    "description": "Fresh blueberries.",
+    "category": "Fruits",
+    "quantity": 15,
+    "unit": "cups"
   },
   {
     "id": 19,
-    "name": "Product 19",
-    "description": "Description for product 19.",
-    "category": "Category C",
-    "quantity": 3,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Kiwi",
+    "description": "Fresh kiwi.",
+    "category": "Fruits",
+    "quantity": 10,
+    "unit": "pieces"
   },
   {
     "id": 20,
-    "name": "Product 20",
-    "description": "Description for product 20.",
-    "category": "Category A",
-    "quantity": 12,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Mango",
+    "quantity": 5,
+    "unit": "pieces"
   },
   {
     "id": 21,
-    "name": "Product 21",
-    "description": "Description for product 21.",
-    "category": "Category B",
-    "quantity": 6,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Raspberry",
+    "description": "Fresh raspberries.",
+    "category": "Fruits",
+    "quantity": 12,
+    "unit": "cups"
   },
   {
     "id": 22,
-    "name": "Product 22",
-    "description": "Description for product 22.",
-    "category": "Category C",
-    "quantity": 10,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Pomegranate",
+    "description": "Juicy pomegranate.",
+    "category": "Fruits",
+    "quantity": 4,
+    "unit": "pieces"
   },
   {
     "id": 23,
-    "name": "Product 23",
-    "description": "Description for product 23.",
-    "category": "Category A",
+    "name": "Cabbage",
+    "description": "Fresh cabbage.",
+    "category": "Vegetables",
     "quantity": 5,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "unit": "pieces"
   },
   {
     "id": 24,
-    "name": "Product 24",
-    "description": "Description for product 24.",
-    "category": "Category B",
-    "quantity": 4,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "name": "Celery",
+    "description": "Fresh celery.",
+    "category": "Vegetables",
+    "quantity": 10,
+    "unit": "pieces"
   },
   {
     "id": 25,
-    "name": "Product 25",
-    "description": "Description for product 25.",
-    "category": "Category C",
-    "quantity": 11,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 26,
-    "name": "Product 26",
-    "description": "Description for product 26.",
-    "category": "Category A",
-    "quantity": 9,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 27,
-    "name": "Product 27",
-    "description": "Description for product 27.",
-    "category": "Category B",
-    "quantity": 8,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 28,
-    "name": "Product 28",
-    "description": "Description for product 28.",
-    "category": "Category C",
-    "quantity": 15,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 29,
-    "name": "Product 29",
-    "description": "Description for product 29.",
-    "category": "Category A",
-    "quantity": 14,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 30,
-    "name": "Product 30",
-    "description": "Description for product 30.",
-    "category": "Category B",
-    "quantity": 12,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 31,
-    "name": "Product 31",
-    "description": "Description for product 31.",
-    "category": "Category C",
-    "quantity": 2,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 32,
-    "name": "Product 32",
-    "description": "Description for product 32.",
-    "category": "Category A",
-    "quantity": 3,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 33,
-    "name": "Product 33",
-    "description": "Description for product 33.",
-    "category": "Category B",
-    "quantity": 5,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 34,
-    "name": "Product 34",
-    "description": "Description for product 34.",
-    "category": "Category C",
+    "name": "Peas",
+    "description": "Fresh green peas.",
+    "category": "Vegetables",
     "quantity": 10,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 35,
-    "name": "Product 35",
-    "description": "Description for product 35.",
-    "category": "Category A",
-    "quantity": 4,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 36,
-    "name": "Product 36",
-    "description": "Description for product 36.",
-    "category": "Category B",
-    "quantity": 3,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 37,
-    "name": "Product 37",
-    "description": "Description for product 37.",
-    "category": "Category C",
-    "quantity": 12,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 38,
-    "name": "Product 38",
-    "description": "Description for product 38.",
-    "category": "Category A",
-    "quantity": 8,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 39,
-    "name": "Product 39",
-    "description": "Description for product 39.",
-    "category": "Category B",
-    "quantity": 10,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
-  },
-  {
-    "id": 40,
-    "name": "Product 40",
-    "description": "Description for product 40.",
-    "category": "Category C",
-    "quantity": 1,
-    "unit": "pcs",
-    "image": "https://via.placeholder.com/150"
+    "unit": "cups"
   }
 ]

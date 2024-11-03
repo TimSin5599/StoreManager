@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductCard, {Product} from './ProductCard';
-import './ProductList.css'
+import ProductCard, { Product } from './ProductCard';
+import './ProductList.css';
 
 export interface ProductListProps {
     products: Product[];
@@ -8,10 +8,16 @@ export interface ProductListProps {
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products, onCardClick }) => {
+
+
     return (
         <div className="product-list">
-            {products.map((product, index) => (
-                <ProductCard key={index} product={product} onClick={() => onCardClick(product)} />
+            {products.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    product={product}
+                    onCardClick={() => onCardClick(product)}>
+                </ProductCard>
             ))}
         </div>
     );

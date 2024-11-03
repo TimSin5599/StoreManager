@@ -1,5 +1,6 @@
 import React from 'react';
-import {Product} from "./ProductCard.tsx";
+import {imageNone, Product} from "./ProductCard.tsx";
+import './ProductModal.css'
 
 interface ProductModalProps {
     product: Product;
@@ -16,7 +17,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                     {product.image ? (
                         <img src={product.image} alt={product.name} className="modal-image" />
                     ) : (
-                        <span className="no-image">Image not available</span>
+                        <img src={imageNone} alt={"Image not available"} className="modal-image" />
                     )}
                     <p>{product.description}</p>
                     <p>Category: {product.category}</p>
