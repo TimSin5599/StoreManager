@@ -1,41 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import ProductList from './components/ProductList';
-import { Product } from './components/ProductCard.tsx';
-import productData from './data/products.json';
-import NavigationBar from "./components/NavigationBar.tsx";
-import './App.css'
-import ProductModal from "./components/ProductModal.tsx";
+import Navbar from './components/NavigationBar.tsx';
+import FiltersDrawer, {Filters} from './components/FiltersDrawer';
+import React, {useState} from "react";
+import ProductList from "./components/ProductList.tsx";
 
 const App: React.FC = () => {
-    const [products, setProducts] = useState<Product[]>([]);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-    useEffect(() => {
-        setProducts(productData);
-    }, []);
+    const [isDrawerOpen, setDrawerOpen] = useState(false);
+    const [filters, setFilters] = useState<Filters>({
+        name: '',
+        inStock: false,
+        category: '',
+    });
 
-    const handleCardClick = (product: Product) => {
-        setSelectedProduct(product);
-        setIsModalOpen(true);
-    };
+    const toggleDrawer = () => setDrawerOpen((prevState) => !prevState);
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        setSelectedProduct(null);
+    const handleFilterApply = (newFilters: Filters) => {
+        setFilters(newFilters);
+        toggleDrawer();
     };
 
     return (
-        <div className="App">
-            <NavigationBar/>
-            <div className="content">
-                <h1>Product List</h1>
-                <ProductList products={products} onCardClick={handleCardClick} />
-                {isModalOpen && selectedProduct && (
-                    <ProductModal product={selectedProduct} onClose={handleCloseModal} />
-                )}
-            </div>
-        </div>
+        <>
+            <Navbar onMenuClick={toggleDrawer} />
+            <FiltersDrawer open={isDrawerOpen}
+                           onClose={toggleDrawer}
+                           onFilter={handleFilterApply} />
+            <ProductList filters={filters} />
+        </>
     );
 };
 
