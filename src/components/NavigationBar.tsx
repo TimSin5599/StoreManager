@@ -4,6 +4,8 @@ import {IoMdPerson} from "react-icons/io";
 
 const NavigationBar: React.FC<{ onMenuClick: () => void }> = ({ onMenuClick }) => {
 
+
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -14,16 +16,28 @@ const NavigationBar: React.FC<{ onMenuClick: () => void }> = ({ onMenuClick }) =
                     StoreManager
                 </Typography>
                 <Stack direction="row" spacing={3} sx={{marginLeft: 2}} alignItems="center">
-                    <Link href="https://example.com" underline="none" variant="h6" color={'white'}>
+                    <Link href="/products/" underline="none" variant="h6" color={'white'} sx={{
+                        transition: 'transform 0.3s',
+                        '&:hover': { transform: 'scale(1.2)' },
+                    }}>
                         Goods
                     </Link>
-                    <Link href="https://example.com" underline="none" variant="h6" color={'white'}>
-                        Warehouses
+                    <Link href="/categories/" underline="none" variant="h6" color={'white'} sx={{
+                        transition: 'transform 0.3s',
+                        '&:hover': { transform: 'scale(1.2)' },
+                    }}>
+                        Categories
                     </Link>
-                    <Link href="https://example.com" underline="none" variant="h6" color={'white'}>
+                    <Link href="https://example.com" underline="none" variant="h6" color={'white'} sx={{
+                        transition: 'transform 0.3s',
+                        '&:hover': { transform: 'scale(1.2)' },
+                    }}>
                         About
                     </Link>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
+                    <IconButton href="/about/" edge="start" color="inherit" aria-label="menu" sx={{
+                        transition: 'transform 0.3s',
+                        '&:hover': { transform: 'scale(1.2)' },
+                    }}>
                         <IoMdPerson />
                     </IconButton>
                 </Stack>

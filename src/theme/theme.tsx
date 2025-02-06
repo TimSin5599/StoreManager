@@ -9,6 +9,7 @@ const theme = createTheme({
         fontFamily: 'Roboto, Arial, sans-serif',
         h5: { fontWeight: 600 },
         h6: { fontFamily: 'Playwrite GB S, sans-serif', color: 'white'},
+
     },
 });
 
