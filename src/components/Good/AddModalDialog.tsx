@@ -1,6 +1,6 @@
 import {Box, Button, Dialog, FormHelperText, Input, Typography} from "@mui/material";
-import {addProduct} from "../store/slices/goodsReducer.ts";
-import {AppDispatch} from "../store";
+import {addProduct} from "../../store/slices/goodsReducer.ts";
+import {AppDispatch} from "../../store";
 import {useDispatch} from "react-redux";
 import {Product} from "./GoodCard.tsx";
 import {useState} from "react";

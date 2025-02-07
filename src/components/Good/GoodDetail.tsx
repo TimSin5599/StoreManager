@@ -1,10 +1,10 @@
 import {Button, CardMedia, Dialog, FormHelperText, Input, Stack, Typography} from "@mui/material";
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../store";
+import {AppDispatch, RootState} from "../../store";
 import {imageNone, Product} from "./GoodCard.tsx";
 import React, {useState} from "react";
-import {changeGood, removeProduct} from "../store/slices/goodsReducer.ts";
+import {changeGood, removeProduct} from "../../store/slices/goodsReducer.ts";
 
 const GoodDetail: React.FC = () => {
     const [open, setOpen] = useState<boolean>(false);

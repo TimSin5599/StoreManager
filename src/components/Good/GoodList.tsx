@@ -1,9 +1,9 @@
 import React, {useMemo, useState} from 'react';
 import GoodCard, {Product} from './GoodCard.tsx';
 import {Box, Button, Pagination} from "@mui/material";
-import {Filters} from "./FiltersDrawer.tsx";
+import {Filters} from "../FiltersDrawer.tsx";
 import {useSelector} from "react-redux";
-import {RootState} from "../store";
+import {RootState} from "../../store";
 import AddModalDialog from "./AddModalDialog.tsx";
 
 const ITEMS_PER_PAGE = 14;

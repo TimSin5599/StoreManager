@@ -10,14 +10,14 @@ import {
     Button,
     Stack,
 } from '@mui/material';
-import {AppDispatch} from "../store";
-import {removeProduct} from "../store/slices/goodsReducer.ts";
+import {AppDispatch} from "../../store";
+import {removeProduct} from "../../store/slices/goodsReducer.ts";
 import {useDispatch} from "react-redux";
 
 export type Product = {
     id: string;
     name: string;
-    category?: string;
+    category?: string | null;
     description?: string;
     image?: string;
     quantity: number;

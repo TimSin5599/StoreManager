@@ -1,8 +1,8 @@
 export const categories = [
     {
-        category: Vegetables
+        name: "Vegetables"
     },
     {
-        category: Fruits
+        name: "Fruits"
     }
 ]

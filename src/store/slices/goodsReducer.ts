@@ -1,7 +1,8 @@
-import {Product} from "../../components/GoodCard.tsx";
+import {Product} from "../../components/Good/GoodCard.tsx";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { v4 } from "uuid";
 import {products} from "../../data/products.tsx";
+import {removeCategoryFromProducts} from "./categoriesReducer.ts";
 
 const initializeProducts = products.map((product) => ({
     ...product,
@@ -27,7 +28,16 @@ export const productsSlice = createSlice({
             if (index !== -1) {
                 state[index] = action.payload;
             }
-        }
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(removeCategoryFromProducts, (state, action: PayloadAction<string>) => {
+             state.forEach((product) => {
+                    if (product.category === action.payload) {
+                        product.category = null;
+                    }
+             });
+        })
     }
 })
 
