@@ -91,9 +91,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ open, onClose, onFilter }
                         <Stack direction="row" alignItems={"center"}>
                             <Select
                                 value={filters.category}
-                                onChange={(e) =>
-                                    handleFilterChange("category", e.target.value as string)
-                                }
+                                onChange={(e) => handleFilterChange("category", e.target.value as string)}
                                 fullWidth
                                 displayEmpty
                             >

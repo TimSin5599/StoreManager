@@ -99,7 +99,7 @@ const GoodDetail: React.FC = () => {
                                     fullWidth
                                     type={key === "quantity" ? "number" : "text"}
                                 />
-                                {errors[key] && (
+                                {errors[key] && (key !== "image" && key !== "description" && key !== "category") && (
                                     <FormHelperText error>{key.charAt(0).toUpperCase() + key.slice(1)} cannot be empty</FormHelperText>
                                 )}
                             </Stack>

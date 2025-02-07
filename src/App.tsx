@@ -11,7 +11,7 @@ import {persistor} from "./store";
 const App: React.FC = () => {
     useEffect(() => {
         localStorage.clear();
-        persistor.purge();
+        persistor.purge().then(() => {})
     }, []);
 
     const [isDrawerOpen, setDrawerOpen] = useState(false);
