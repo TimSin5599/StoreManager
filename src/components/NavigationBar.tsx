@@ -4,8 +4,6 @@ import {IoMdPerson} from "react-icons/io";
 
 const NavigationBar: React.FC<{ onMenuClick: () => void }> = ({ onMenuClick }) => {
 
-
-
     return (
         <AppBar position="static">
             <Toolbar>

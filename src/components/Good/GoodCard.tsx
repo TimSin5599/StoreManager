@@ -10,34 +10,30 @@ import {
     Button,
     Stack,
 } from '@mui/material';
-import {AppDispatch} from "../../store";
-import {removeProduct} from "../../store/slices/goodsReducer.ts";
-import {useDispatch} from "react-redux";
 
 export type Product = {
-    id: string;
+    id: number;
     name: string;
-    category?: string | null;
-    description?: string;
-    image?: string;
+    description?: string | null;
+    category_id?: number | null;
+    image?: string | null;
     quantity: number;
     unit: string;
+    price?: number | null;
 };
 
 type ProductCardProps = {
     product: Product;
+    handleRemoveGood: (product: Product) => void;
 };
 
 export const imageNone = "https://www.clipartsuggest.com/images/181/log-in-sign-up-upload-clipart-o72BVQ-clipart.png";
 
-const GoodCard: React.FC<ProductCardProps> = ({ product }) => {
-    const dispatch: AppDispatch = useDispatch();
+const GoodCard: React.FC<ProductCardProps> = ({ product, handleRemoveGood }) => {
     const navigate = useNavigate();
 
     const handleOpen = () => navigate(`/product/${product.id}`);
-    const handleRemoveGood = () => {
-        dispatch(removeProduct(product.id));
-    }
+
 
     return (
         <>
@@ -56,7 +52,7 @@ const GoodCard: React.FC<ProductCardProps> = ({ product }) => {
                             </Typography>
                             <Button variant="outlined"
                                     color="error"
-                                    onClick={(e) => {e.stopPropagation(); handleRemoveGood()}}
+                                    onClick={(e) => {e.stopPropagation(); handleRemoveGood(product)}}
                                     sx={{
                                         marginRight: 1,
                                         minWidth: "32px",
@@ -90,7 +86,7 @@ const GoodCard: React.FC<ProductCardProps> = ({ product }) => {
                                 {product.description}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
-                                {product.category}
+                                {product.category_id}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 Quantity: {product.quantity}

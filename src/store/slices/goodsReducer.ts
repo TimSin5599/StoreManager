@@ -1,45 +1,72 @@
 import {Product} from "../../components/Good/GoodCard.tsx";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { v4 } from "uuid";
-import {products} from "../../data/products.tsx";
-import {removeCategoryFromProducts} from "./categoriesReducer.ts";
+import {addProduct, fetchProducts, removeProduct, updateProduct} from "../../components/api/goodApi.ts";
 
-const initializeProducts = products.map((product) => ({
-    ...product,
-    id: v4(),
-}));
+type ProductsState = {
+    products: Product[];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+};
 
-type ProductsState = Product[];
-
-const initialState: ProductsState = initializeProducts;
+const initialState: ProductsState = {
+    products: [],
+    status: 'idle',
+    error: null,
+}
 
 export const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        addProduct: (state, action: PayloadAction<Product>) => {
-            state.push(action.payload);
+        clearAll: (state) => {
+            state.status = 'idle';
         },
-        removeProduct: (state, action: PayloadAction<string>) => {
-            return state.filter(product => product.id !== action.payload);
-        },
-        changeGood: (state, action: PayloadAction<Product>) => {
-            const index = state.findIndex(product => product.id === action.payload.id);
-            if (index !== -1) {
-                state[index] = action.payload;
-            }
-        },
+        removeCategoryFromProducts: (state, action: PayloadAction<number>) => {
+            state.products.forEach((product) => {
+                if (product.category_id === action.payload) {
+                    product.category_id = 0;
+                }
+            });
+        }
     },
     extraReducers: (builder) => {
-        builder.addCase(removeCategoryFromProducts, (state, action: PayloadAction<string>) => {
-             state.forEach((product) => {
-                    if (product.category === action.payload) {
-                        product.category = null;
-                    }
-             });
-        })
-    }
+        builder
+            // Fetch Products
+            .addCase(fetchProducts.pending, (state) => {
+                state.status = "loading"
+            })
+            .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
+                state.status = "succeeded"
+                state.products = action.payload;
+            })
+            .addCase(fetchProducts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Ошибка';
+            })
+
+            // Add Product
+            .addCase(addProduct.fulfilled, (state, action: PayloadAction<Product>) => {
+                state.products.push(action.payload as Product);
+            })
+
+            // Remove Product
+            .addCase(removeProduct.fulfilled, (state, action: PayloadAction<{id: number}>) => {
+                state.products = state.products.filter((product) => product.id !== action.payload.id);
+            })
+            .addCase(removeProduct.rejected, (_ , action) => {
+                console.log(action.error.message);
+            })
+
+            //Update Product
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                const index = state.products.findIndex((product) => product.id === action.payload.id);
+
+                if (index !== -1) {
+                    state.products[index] = action.payload;
+                }
+            })
+    },
 })
 
 export default productsSlice.reducer;
-export const {addProduct, removeProduct, changeGood} = productsSlice.actions;
+export const {clearAll, removeCategoryFromProducts} = productsSlice.actions;

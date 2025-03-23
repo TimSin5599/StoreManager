@@ -2,23 +2,27 @@ import Category from "./Category.tsx";
 import {Button, Dialog, FormHelperText, Input, Stack, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
-import {addCategory, CategoryProps} from "../../store/slices/categoriesReducer.ts";
-import {useState} from "react";
-import {v4} from "uuid";
+import {CategoryProps} from "../../store/slices/categoriesReducer.ts";
+import {useEffect, useState} from "react";
+import {createCategory, fetchCategories} from "../api/categoriesApi.ts";
+import {Navigate} from "react-router";
 
 const CategoryList = () => {
-    const categories = useSelector((state: RootState) => state.categories);
+    // const categorySelector = useSelector((state: RootState) => {state.categories});
     const dispatch: AppDispatch = useDispatch();
     const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-    const [newCategory, setNewCategory] = useState<CategoryProps>({id: v4(), name: ""});
+    const [newCategory, setNewCategory] = useState<string>("");
     const [open, setOpen] = useState<boolean>(false);
 
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewCategory((prevState) => ({
-            ...prevState,
-            name: e.target.value,
-        }))
-    }
+    const categories = useSelector((state: RootState) => state.categories.categories);
+    const status = useSelector((state: RootState) => state.categories.status);
+    const error = useSelector((state: RootState) => state.categories.error);
+
+    useEffect(() => {
+        if (status == "idle") {
+            dispatch(fetchCategories());
+        }
+    }, [status, dispatch])
 
     const handleAddCategory = () => {
         const newErrors: { [key: string]: boolean } = {};
@@ -31,10 +35,14 @@ const CategoryList = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            dispatch(addCategory({ ...newCategory}));
-            setNewCategory({id: v4(), name: ""});
+            dispatch(createCategory(newCategory));
+            setNewCategory("");
             setOpen(false);
         }
+    }
+
+    if (status == "failed") {
+        return (<Navigate to={"/auth/login"} />)
     }
 
     return (
@@ -62,7 +70,7 @@ const CategoryList = () => {
                     }} fullWidth>
                 <Stack direction="column" alignItems={"center"} gap={2}>
                     <Typography alignSelf={"center"} fontSize={20}  fontWeight={"bold"}>Adding Category</Typography>
-                    <Input placeholder={"Category"} onChange={handleInput}></Input>
+                    <Input placeholder={"Category"} onChange={(e) => setNewCategory(e.target.value)}></Input>
                     {errors['name'] && (
                         <FormHelperText error>Category name cannot be empty</FormHelperText>
                     )}

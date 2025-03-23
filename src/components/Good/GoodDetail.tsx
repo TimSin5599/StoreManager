@@ -1,10 +1,10 @@
-import {Button, CardMedia, Dialog, FormHelperText, Input, Stack, Typography} from "@mui/material";
+import {Button, CardMedia, Dialog, FormHelperText, Input, MenuItem, Select, Stack, Typography} from "@mui/material";
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
 import {imageNone, Product} from "./GoodCard.tsx";
 import React, {useState} from "react";
-import {changeGood, removeProduct} from "../../store/slices/goodsReducer.ts";
+import {updateProduct, removeProduct} from "../api/goodApi.ts";
 
 const GoodDetail: React.FC = () => {
     const [open, setOpen] = useState<boolean>(false);
@@ -12,7 +12,8 @@ const GoodDetail: React.FC = () => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
     const { id } = useParams<{ id: string }>();
-    const good = useSelector((state: RootState) => state.products.find((g) => g.id === id))!;
+    const good = useSelector((state: RootState) => state.products.products.find((g) => g.id == parseInt(id!)))!;
+    const categories = useSelector((state: RootState) => state.categories.categories);
     const [goodItem, setGood] = useState<Product>(good)
 
     const handleChange = () => {
@@ -27,6 +28,13 @@ const GoodDetail: React.FC = () => {
         }));
     }
 
+    const handleChangeCategory = (category_id: number | null) => {
+        setGood((prev: Product) => ({
+            ...prev,
+            ["category_id"]: category_id,
+        }))
+    }
+
     const handleChangeGood = () => {
         const newErrors: { [key: string]: boolean } = {};
         Object.entries(goodItem).forEach(([key, value]) => {
@@ -38,7 +46,7 @@ const GoodDetail: React.FC = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            dispatch(changeGood({ ...goodItem}));
+            dispatch(updateProduct(goodItem));
             handleChange();
         }
     }
@@ -48,11 +56,17 @@ const GoodDetail: React.FC = () => {
         navigate('/products')
     }
 
+    if (good == undefined) {
+        return (
+            <div>Product undefined</div>
+        )
+    }
+
     return (
         <Stack direction="column" paddingLeft={2} paddingRight={2} gap={2} alignItems={"center"} justifyContent={"center"} sx={{ height: '80vh' }}>
             <CardMedia
                 component="img"
-                image={good.image === undefined ? imageNone : good.image}
+                image={good?.image === null ? imageNone : good.image}
                 alt={good.name}
                 sx={{
                     height: 200,
@@ -62,10 +76,26 @@ const GoodDetail: React.FC = () => {
             {Object.keys(good).map((key) => (
                     key !== "id" && key !== "image" && (
                         <Stack direction={"row"} alignItems={"center"} justifyContent={"center"}>
-                            <Typography fontWeight={"bold"} style={{}}>
-                                {key.charAt(0).toUpperCase() + key.slice(1)}:
-                            </Typography>
-                            <Typography marginLeft={1}>{good[key as keyof Product]}</Typography>
+                            {
+                                key === "category_id" && (
+                                    <>
+                                        <Typography fontWeight={"bold"} style={{}}>
+                                            Category:
+                                        </Typography>
+                                        <Typography marginLeft={1}>{good.category_id != null ? categories[categories.findIndex((category) => category.id === good.category_id)].name : "Отсутствует"}</Typography>
+                                    </>
+                            )
+                            }
+                            {
+                                key !== "category_id" && (
+                                    <>
+                                        <Typography fontWeight={"bold"} style={{}}>
+                                            {key.charAt(0).toUpperCase() + key.slice(1)}:
+                                        </Typography>
+                                        <Typography marginLeft={1}>{good[key as keyof Product]}</Typography>
+                                    </>
+                                )
+                            }
                         </Stack>
                     )
                 )
@@ -88,7 +118,7 @@ const GoodDetail: React.FC = () => {
 
                 <Stack padding={2}>
                     {Object.keys(goodItem).map((key) => (
-                        key !== "id" && (
+                        key !== "id" && key !== "category_id" && (
                             <Stack direction={"row"} alignItems={"center"} justifyContent={"center"}>
                                 <Typography width={"13vh"}>{key.charAt(0).toUpperCase() + key.slice(1)}: </Typography>
                                 <Input
@@ -105,6 +135,18 @@ const GoodDetail: React.FC = () => {
                             </Stack>
                         )
                     ))}
+                    <Typography width={"13vh"}>Category:</Typography>
+                    <Select
+                        name="category_id"
+                        value={goodItem.category_id}
+                        onChange={(e) => handleChangeCategory(Number(e.target.value))}
+                        fullWidth
+                        displayEmpty
+                    >
+                        {categories.map(category => (
+                            <MenuItem value={Number(category.id)} key={category.id}>{category.name}</MenuItem>
+                        ))}
+                    </Select>
                 </Stack>
 
                 {/*<Stack direction="row" alignSelf={"center"} sx={{ border: "1px solid black", p: 2 }}>*/}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Drawer,
     TextField,
@@ -10,11 +10,14 @@ import {
     Box, Stack, IconButton,
 } from '@mui/material';
 import {Close} from "@mui/icons-material";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../store";
+import {fetchCategories} from "./api/categoriesApi.ts";
 
 export type Filters = {
     name: string;
     inStock: boolean;
-    category: string;
+    category_id?: number | null;
 };
 
 interface FiltersDrawerProps {
@@ -24,13 +27,24 @@ interface FiltersDrawerProps {
 }
 
 const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ open, onClose, onFilter }) => {
+    const categories = useSelector((state: RootState) => state.categories.categories);
+    const status = useSelector((state: RootState) => state.categories.status);
+    const dispatch: AppDispatch = useDispatch();
+
+    useEffect(() => {
+        if (status === "idle") {
+            dispatch(fetchCategories());
+        }
+    }, [categories, dispatch]);
+
     const [filters, setFilters] = useState<Filters>({
         name: "",
         inStock: false,
-        category: "",
+        category_id: 0,
     });
 
     const handleFilterChange = <K extends keyof Filters>(key: K, value?: Filters[K]) => {
+        console.log(key, value);
         if (value === undefined) {
             setFilters((prev) => ({ ...prev, [key]: key === "inStock" ? false : "" }));
             return;
@@ -43,8 +57,8 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ open, onClose, onFilter }
     };
 
     const handleReset = () => {
-        setFilters({name: "", inStock: false, category: ""});
-        onFilter({name: "", inStock: false, category: ""});
+        setFilters({name: "", inStock: false, category_id: 0});
+        onFilter({name: "", inStock: false, category_id: 0});
     };
 
     return (
@@ -90,35 +104,34 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ open, onClose, onFilter }
 
                         <Stack direction="row" alignItems={"center"}>
                             <Select
-                                value={filters.category}
-                                onChange={(e) => handleFilterChange("category", e.target.value as string)}
+                                value={filters.category_id}
+                                onChange={(e) => handleFilterChange("category_id", Number(e.target.value))}
                                 fullWidth
                                 displayEmpty
                             >
-                                <MenuItem value="">All categories</MenuItem>
-                                <MenuItem value="Vegetables">Vegetables</MenuItem>
-                                <MenuItem value="Fruits">Fruits</MenuItem>
+                                <MenuItem value={0} key={0}>Все категории</MenuItem>
+                                {categories.map(category => (
+                                    <MenuItem value={category.id!} key={category.id}>{category.name}</MenuItem>
+                                ))}
                             </Select>
-                            {filters.category && (
-                                <IconButton
-                                    onClick={() => handleFilterChange("category")}
-                                    size="small"
-                                    sx={{
-                                        display: 'flex',
-                                        marginLeft: 1,
-                                        alignItems: 'center',
-                                        justifyContent: "center",
-                                        width: 36,
-                                        height: 36,
-                                        borderRadius: "50%",
-                                        "&:hover": {
-                                            backgroundColor: "rgba(0, 0, 0, 0.1)",
-                                        },
-                                    }}
-                                >
-                                    <Close />
-                                </IconButton>
-                            )}
+                            <IconButton
+                                onClick={() => handleFilterChange("category_id", 0)}
+                                size="small"
+                                sx={{
+                                    display: 'flex',
+                                    marginLeft: 1,
+                                    alignItems: 'center',
+                                    justifyContent: "center",
+                                    width: 36,
+                                    height: 36,
+                                    borderRadius: "50%",
+                                    "&:hover": {
+                                        backgroundColor: "rgba(0, 0, 0, 0.1)",
+                                    },
+                                }}
+                            >
+                                <Close />
+                            </IconButton>
                         </Stack>
 
                         <Button onClick={handleApply} variant="contained" color="primary" fullWidth>

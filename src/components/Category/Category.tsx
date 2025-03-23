@@ -1,14 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
 import {Button, Dialog, FormHelperText, Input, Stack, Typography} from "@mui/material";
-import {
-    CategoryProps,
-    changeCategory,
-    removeCategory,
-    removeCategoryFromProducts
-} from "../../store/slices/categoriesReducer.ts";
+import {CategoryProps} from "../../store/slices/categoriesReducer.ts";
 import {useState} from "react";
 import CategoryConfirm from "./CategoryConfirm.tsx";
+import {removeCategory, updateCategory} from "../api/categoriesApi.ts";
+import {removeCategoryFromProducts} from "../../store/slices/goodsReducer.ts";
 
 
 const Category: React.FC<CategoryProps> = (category) => {
@@ -16,8 +13,7 @@ const Category: React.FC<CategoryProps> = (category) => {
     const [openConfirm, setOpenConfirm] = useState(false);
     const [newCategory, setNewCategory] = useState<CategoryProps>(category)
     const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-    const products = useSelector((state: RootState) => state.products);
-    // const categories = useSelector((state: RootState) => state.categories);
+    const products = useSelector((state: RootState) => state.products.products);
     const dispatch: AppDispatch = useDispatch();
 
     const handleChange = () => {
@@ -43,27 +39,32 @@ const Category: React.FC<CategoryProps> = (category) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            dispatch(changeCategory({ ...newCategory}));
+            dispatch(updateCategory(newCategory));
             handleChange();
         }
     }
 
     const handleRemove = () => {
-        const isUseCategory = products.some(product => product.category === category.name);
+        const isUseCategory = products.some(product => product.category_id === category.id);
 
         if (isUseCategory) {
             setOpenConfirm(true);
         } else {
-            dispatch(removeCategory(category.name));
-            dispatch(removeCategoryFromProducts(category.name));
+            dispatch(removeCategoryFromProducts(category.id!));
+            dispatch(removeCategory(category));
             setOpenConfirm(false);
         }
     }
 
     const handleRemoveConfirm = () => {
-        dispatch(removeCategory(category.name));
-        dispatch(removeCategoryFromProducts(category.name));
+        dispatch(removeCategoryFromProducts(category.id!));
+        dispatch(removeCategory(category));
         setOpenConfirm(false);
+    }
+
+    // console.log(category);
+    if (category == undefined) {
+        return (<div>Undefined</div>)
     }
 
     return (
