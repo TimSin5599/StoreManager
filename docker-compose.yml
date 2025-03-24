@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: timofeysinitsyn
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: timofey
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  server:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USER: timofeysinitsyn
+      DATABASE_NAME: postgres
+      DATABASE_PASSWORD: timofey
+      DATABASE_DIALECT: postgres
+      JWT_SECRET: SECRET
+      FRONT: http://localhost:5173
+      PORT: 3000
+    command: npm run start
+
+volumes:
+  pgdata:

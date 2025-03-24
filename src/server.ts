@@ -1,17 +1,33 @@
 import { createServer } from 'http';
 import express from 'express';
-import productRouter from "./routes/productRoutes";
-import categoryRouter from "./routes/categoryRoutes";
-import errorHandler from "./utils/errorHandler";
+import cookieParser from 'cookie-parser';
+import dotenv from "dotenv";
+import cors from 'cors';
+import passport from "passport";
+import categoryRouter from "./routes/categoryRoutes.ts";
+import authRouter from "./routes/authRouter.ts";
+import errorHandler from "./utils/errorHandler.ts";
+import productRouter, {middleware} from "./routes/productRoutes.ts";
+
+dotenv.config();
 
 const app = express();
 const server = createServer(app);
 
-const PORT = 3000;
+const PORT = process.env.PORT!;
+console.log(`Server running on port: ${PORT}`);
 
 app.use(express.json());
-app.use('/api/products', productRouter);
-app.use('/api/categories', categoryRouter);
+app.use(cookieParser());
+app.use(cors({
+    origin: process.env.FRONT,
+    credentials: true,
+}))
+
+
+app.use('/api/auth', authRouter)
+app.use('/api/products', middleware, passport.authenticate('jwt', { session: false }), productRouter);
+app.use('/api/categories', middleware, passport.authenticate('jwt', { session: false }), categoryRouter);
 app.use(errorHandler);
 
 

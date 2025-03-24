@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../db';
+import { sequelize } from '../db.ts';
 
 export class Product extends Model {}
 
@@ -23,7 +23,8 @@ Product.init({
         references: {
             model: 'categories',
             key: 'id'
-        }
+        },
+        onDelete: 'SET NULL'
     },
     image: {
         type: DataTypes.STRING(255),

@@ -1,6 +1,7 @@
 /tmp
 /out-tsc
 
+# .gitignore
 /node_modules
 npm-debug.log*
 yarn-debug.log*
@@ -8,5 +9,6 @@ yarn-error.log*
 /.pnp
 .pnp.js
 .idea
+.env
 
 .vscode/*

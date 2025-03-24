@@ -1,15 +1,17 @@
-import {NextFunction, Request, Response} from 'express';
-import {Category} from "../models/Category";
+import {NextFunction, Request, RequestHandler, Response} from 'express';
+import {Category} from "../models/Category.ts";
+import {Product} from "../models/Product.ts";
 
 export const createCategory = async (req: Request, res: Response, next: NextFunction) => {
-    const { name } = req.body;
+    const { name, allowGroups } = req.body;
 
     if (!name) {
-        return res.status(400).json({ error: 'Name is required' });
+        res.status(400).json({ error: 'Name is required' });
+        return;
     }
 
     try {
-        const newCategory = await Category.create({ name });
+        const newCategory = await Category.create({ name, allowGroups });
         res.status(201).json({
             message: 'Category created successfully',
             category: newCategory
@@ -25,14 +27,16 @@ export const updateCategory = async (req: Request, res: Response, next: NextFunc
     const { name } = req.body;
 
     if (!name) {
-        return res.status(400).json({ error: 'Name is required' });
+        res.status(400).json({ error: 'Name is required' });
+        return;
     }
 
     try {
         const category = await Category.findByPk(categoryId);
 
         if (!category) {
-            return res.status(404).json({ error: 'Category not found' });
+            res.status(404).json({ error: 'Category not found' });
+            return;
         } else {
             category.name = name;
             await category.save();
@@ -50,13 +54,20 @@ export const updateCategory = async (req: Request, res: Response, next: NextFunc
 
 export const deleteCategory = async (req: Request, res: Response, next: NextFunction) => {
     const categoryId = req.params.id;
-
     try {
         const category = await Category.findByPk(categoryId);
 
         if (!category) {
-            return res.status(404).json({ error: 'Category not found' });
+            res.status(404).json({error: 'Category not found'});
+            return;
         }
+
+        const [updatedRows] = await Product.update(
+            {category_id: null},
+            {where: {category_id: categoryId}}
+        );
+
+        console.log("The quantity of updated rows - " + updatedRows);
 
         await category.destroy();
 
@@ -73,7 +84,7 @@ export const deleteCategory = async (req: Request, res: Response, next: NextFunc
 export const getAllCategories = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const categories = await Category.findAll();
-        res.json(categories);
+        res.status(200).json(categories);
     } catch (err) {
         console.error('Error fetching categories:', err);
         next(err);
@@ -81,13 +92,14 @@ export const getAllCategories = async (req: Request, res: Response, next: NextFu
 }
 
 export const getCategory = async (req: Request, res: Response, next: NextFunction) => {
-    const categoryId = req.params.id;
-
     try {
+        const categoryId = req.params.id;
+
         const category = await Category.findByPk(categoryId);
 
         if (!category) {
-            return res.status(404).json({ error: 'Category not found' });
+            res.status(404).json({ error: 'Category not found' });
+            return;
         }
 
         res.json(category);

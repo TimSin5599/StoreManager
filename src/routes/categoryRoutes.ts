@@ -5,14 +5,17 @@ import {
     getAllCategories,
     getCategory,
     updateCategory
-} from "../controllers/categoryController";
+} from "../controllers/categoryController.ts";
+import {middleware} from "./productRoutes.ts";
 
 const categoryRouter = express.Router();
 
-categoryRouter.get('/', getAllCategories)
-categoryRouter.get('/:id', getCategory)
-categoryRouter.post('/', createCategory)
-categoryRouter.delete('/:id', deleteCategory)
-categoryRouter.put('/:id', updateCategory)
+categoryRouter.use(middleware)
+
+categoryRouter.get('/', getAllCategories);
+categoryRouter.get('/:id', getCategory);
+categoryRouter.post('/', createCategory);
+categoryRouter.delete('/:id', deleteCategory);
+categoryRouter.put('/:id', updateCategory);
 
 export default categoryRouter;

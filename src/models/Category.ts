@@ -1,8 +1,9 @@
-import {sequelize} from "../db";
+import {sequelize} from "../db.ts";
 import {DataTypes, Model} from "sequelize";
 
 export class Category extends Model {
     name!: string;
+    allowGroups?: string[];
 }
 
 Category.init({
@@ -13,8 +14,14 @@ Category.init({
     },
     name: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
+        unique: true,
     },
+    allowGroups: {
+        type: DataTypes.ARRAY(DataTypes.TEXT),
+        allowNull: true,
+        defaultValue: ['admin'],
+    }
 }, {
     sequelize,
     modelName: 'Category',

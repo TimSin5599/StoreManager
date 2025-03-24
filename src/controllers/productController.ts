@@ -1,10 +1,11 @@
 import {NextFunction, Request, Response} from 'express';
-import {Product} from "../models/Product";
+import {Product} from "../models/Product.ts";
 
 export const getAllProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const products = await Product.findAll();
         res.json(products);
+        console.log("All products retrieved");
     } catch (err) {
         console.error('Error fetching products:', err);
         next(err);
@@ -18,7 +19,8 @@ export const getProduct = async (req: Request, res: Response, next: NextFunction
         const product = await Product.findByPk(productId);
 
         if (!product) {
-            return res.status(404).json({ error: 'Product not found' });
+            res.status(404).json({ error: 'Product not found' });
+            return;
         }
 
         res.json(product);
@@ -32,6 +34,8 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     try {
         const { name, description, category_id, image, quantity, unit, price } = req.body;
 
+        console.log(name, description, category_id, image, quantity, unit, price);
+
         if (!name || !quantity || !unit) {
             res.status(400).json({ error: 'Fields \"name\", \"quantity\", and \"unit\" are required' });
             return;
@@ -43,16 +47,16 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
         }
 
         const product = await Product.create({
-            name,
+            name: name,
             description: description || null,
             category_id: category_id || null,
             image: image || null,
             quantity: quantity,
-            unit,
+            unit: unit,
             price: price || null
         });
 
-        res.status(201).json({ message: 'Product created successfully', product: product.toJSON() });
+        res.status(201).json(product.toJSON());
     } catch (err) {
         console.error('Database query error:', err);
         next(err);
