@@ -20,7 +20,8 @@ export const updateCategory = createAsyncThunk<CategoryProps, CategoryProps>('ca
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(category)
+                body: JSON.stringify(category),
+                credentials: "include",
             }
         );
 
@@ -36,13 +37,14 @@ export const updateCategory = createAsyncThunk<CategoryProps, CategoryProps>('ca
         return message.category;
 });
 
-export const createCategory = createAsyncThunk<CategoryProps, string>('categories/createCategory',
-    async (category: string) => {
+export const createCategory = createAsyncThunk<CategoryProps, {name: string, allowGroups: string[]}>('categories/createCategory',
+    async (Category: {name: string, allowGroups: string[]}) => {
         const response = await fetch('http://localhost:3000/api/categories/',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({name: category})
+                body: JSON.stringify(Category),
+                credentials: "include",
             }
         );
 
@@ -63,6 +65,7 @@ export const removeCategory = createAsyncThunk<number, CategoryProps>('categorie
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: "include",
             }
         );
 

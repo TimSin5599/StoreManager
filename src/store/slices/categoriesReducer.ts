@@ -9,6 +9,7 @@ import {
 export interface CategoryProps {
     id: number | null;
     name: string;
+    allowGroups?: string | null;
 }
 
 type CategoriesState = {
@@ -80,7 +81,10 @@ export const categoriesSlice = createSlice({
             .addCase(removeCategory.fulfilled, (state, action: PayloadAction<number>) => {
                 state.categories = state.categories.filter((category) => category.id !== action.payload)
             })
-            .addCase(removeCategory.rejected, (_, action) => {
+            .addCase(removeCategory.rejected, (state, action) => {
+                if (action.error.message) {
+                    state.error = action.error.message;
+                }
                 console.log(action.error.message);
             })
     }

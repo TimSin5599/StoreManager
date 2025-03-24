@@ -16,7 +16,6 @@ const GoodList: React.FC<({ filters: Filters })> = ({ filters }) => {
 
     const products = useSelector((state: RootState) => state.products.products);
     const status = useSelector((state: RootState) => state.products.status);
-    const error = useSelector((state: RootState) => state.products.error);
 
     // AddModalDialog for adding products
     const [openAddModal, setOpenAddModal] = useState(false);

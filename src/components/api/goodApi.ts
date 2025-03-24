@@ -22,6 +22,7 @@ export const addProduct = createAsyncThunk('products/addProduct',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newProduct),
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -39,6 +40,7 @@ export const removeProduct = createAsyncThunk('products/removeProduct',
         const response = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -58,7 +60,8 @@ export const updateProduct = createAsyncThunk('products/updateProduct',
         const response = await fetch(`http://localhost:3000/api/products/${product.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(product)
+            body: JSON.stringify(product),
+            credentials: "include",
         });
 
         if (!response.ok) {

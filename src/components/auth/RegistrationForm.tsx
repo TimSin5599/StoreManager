@@ -1,46 +1,49 @@
-import React, {useState} from "react";
-import {Box, Button, Link, Paper, TextField, Typography} from "@mui/material";
+import React, { useState } from 'react';
+import { Box, Paper, Typography, TextField, Button } from '@mui/material';
 import {useNavigate} from "react-router";
-import {setStatus} from "../../store/slices/goodsReducer.ts";
-import {AppDispatch} from "../../store";
-import {useDispatch} from "react-redux";
 
-const Authorization = () => {
+const RegisterForm = () => {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const [group, setGroup] = useState('');
+    const [avatarUrl, setAvatarUrl] = useState('');
     const navigate = useNavigate();
-    const dispatch: AppDispatch = useDispatch();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setMessage('');
+
+        const userData = {
+            username: username,
+            email: email,
+            password: password,
+            group: group,
+            avatarUrl: avatarUrl,
+        };
 
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch('http://localhost:3000/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({email: email, password: password }),
+                body: JSON.stringify(userData),
             });
 
             const data = await response.json();
 
             if (!response.ok) {
-                setMessage(data.message || 'Ошибка входа');
                 return;
             }
 
             console.log(data);
             localStorage.setItem('user', JSON.stringify(data));
 
-            setMessage('Успешный вход!');
-            dispatch(setStatus('idle'));
-            navigate('/products');
         } catch (err) {
             console.error('Ошибка:', err);
-            setMessage('Ошибка при подключении к серверу');
         }
+
+        console.log('Регистрация пользователя:', userData);
+        navigate('/auth/login');
     };
 
     return (
@@ -56,8 +59,19 @@ const Authorization = () => {
             <Paper elevation={6} sx={{ padding: 4, width: 350, borderRadius: 2 }}>
                 <form onSubmit={handleSubmit}>
                     <Typography variant="h5" mb={2} align="center">
-                        Вход
+                        Регистрация
                     </Typography>
+
+                    <TextField
+                        fullWidth
+                        label="Username"
+                        variant="outlined"
+                        margin="normal"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+
                     <TextField
                         fullWidth
                         label="Email"
@@ -68,9 +82,10 @@ const Authorization = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
+
                     <TextField
                         fullWidth
-                        label="Пароль"
+                        label="Password"
                         variant="outlined"
                         margin="normal"
                         type="password"
@@ -78,40 +93,39 @@ const Authorization = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+
+                    <TextField
+                        fullWidth
+                        label="Group"
+                        variant="outlined"
+                        margin="normal"
+                        value={group}
+                        onChange={(e) => setGroup(e.target.value)}
+                        required
+                    />
+
+                    <TextField
+                        fullWidth
+                        label="Avatar URL"
+                        variant="outlined"
+                        margin="normal"
+                        value={avatarUrl}
+                        onChange={(e) => setAvatarUrl(e.target.value)}
+                        required
+                    />
+
                     <Button
                         fullWidth
                         type="submit"
                         variant="contained"
                         sx={{ mt: 2 }}
                     >
-                        Войти
+                        Зарегистрироваться
                     </Button>
-
-                    <Box sx={{ display: "flex", justifyContent: "center", textAlign: 'center', alignItems: "center", mt: 2, flexDirection: "row", gap: 0.5 }}>
-                        <Typography variant="body2" color="textSecondary">
-                            Нет аккаунта?
-                        </Typography>
-                        <Link href="/auth/register" style={{ textDecoration: 'none' }}>
-                            <Button variant="text" sx={{ padding: 0, textTransform: 'none', color: 'blue' }}>
-                                Регистрация
-                            </Button>
-                        </Link>
-                    </Box>
-
-                    {message && (
-                        <Typography
-                            variant="body2"
-                            color={message.includes('успех') ? 'green' : 'error'}
-                            align="center"
-                            mt={2}
-                        >
-                            {message}
-                        </Typography>
-                    )}
                 </form>
             </Paper>
         </Box>
     );
-}
+};
 
-export default Authorization;
+export default RegisterForm;

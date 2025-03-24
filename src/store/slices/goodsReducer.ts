@@ -18,6 +18,9 @@ export const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
+        setStatus: (state, action: PayloadAction<'idle' | 'loading' | 'succeeded' | 'failed'>) => {
+            state.status = action.payload;
+        },
         clearAll: (state) => {
             state.status = 'idle';
         },
@@ -69,4 +72,4 @@ export const productsSlice = createSlice({
 })
 
 export default productsSlice.reducer;
-export const {clearAll, removeCategoryFromProducts} = productsSlice.actions;
+export const {setStatus, clearAll, removeCategoryFromProducts} = productsSlice.actions;

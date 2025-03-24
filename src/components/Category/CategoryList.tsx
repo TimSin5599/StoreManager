@@ -9,6 +9,7 @@ import {Navigate} from "react-router";
 
 const CategoryList = () => {
     // const categorySelector = useSelector((state: RootState) => {state.categories});
+    const user = JSON.parse(localStorage.getItem("user") as string);
     const dispatch: AppDispatch = useDispatch();
     const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
     const [newCategory, setNewCategory] = useState<string>("");
@@ -16,7 +17,6 @@ const CategoryList = () => {
 
     const categories = useSelector((state: RootState) => state.categories.categories);
     const status = useSelector((state: RootState) => state.categories.status);
-    const error = useSelector((state: RootState) => state.categories.error);
 
     useEffect(() => {
         if (status == "idle") {
@@ -35,7 +35,7 @@ const CategoryList = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            dispatch(createCategory(newCategory));
+            dispatch(createCategory({name: newCategory, allowGroups: [user.group]}));
             setNewCategory("");
             setOpen(false);
         }
@@ -49,9 +49,12 @@ const CategoryList = () => {
         <Stack gap={3} direction="column" alignItems="center" justifyContent="center" sx={{height: '80vh'}}>
             <Typography fontSize={20} fontWeight={"bold"}>Category list:</Typography>
             <Stack direction={"column"} gap={2} justifyContent={"center"} alignItems="center">
-                {categories.map((category: CategoryProps) => (
-                    <Category key={category.id} id={category.id} name={category.name} />
-                ))}
+                {categories.map((category: CategoryProps) => {
+                    if (category.allowGroups?.includes(user.group) || user.group === "admin") {
+                        return (
+                        <Category key={category.id} id={category.id} name={category.name} />)
+                    }
+                })}
             </Stack>
 
             <Button variant={"contained"} color={"primary"} onClick={() => setOpen(true)}>Add category</Button>
