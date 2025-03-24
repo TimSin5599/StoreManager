@@ -4,9 +4,9 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: timofeysinitsyn
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: timofey
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -21,13 +21,13 @@ services:
       - db
     environment:
       DATABASE_HOST: db
-      DATABASE_USER: timofeysinitsyn
-      DATABASE_NAME: postgres
-      DATABASE_PASSWORD: timofey
-      DATABASE_DIALECT: postgres
-      JWT_SECRET: SECRET
-      FRONT: http://localhost:5173
-      PORT: 3000
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_DIALECT: ${DATABASE_DIALECT}
+      JWT_SECRET: ${JWT_SECRET}
+      FRONT: ${FRONT}
+      PORT: ${PORT}
     command: npm run start
 
 volumes:
